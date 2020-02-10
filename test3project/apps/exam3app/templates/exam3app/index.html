@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log in reg</title>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam1app/css/style.css' %}">
+</head>
+
+<body>
+
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h1></h1>
+    <div class="name">
+        <form action="/register" method="POST">
+            <h1>Register Here</h1>
+            {% csrf_token %}
+            <table>
+            <tr>
+                <td>Email:</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+            </tr>
+            <tr>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+            <td>Confirm Password:</td>
+        </tr>
+        <tr>
+            <td><input type="password" name="pwconfirm"></td>
+        </tr>
+        <tr>
+                <td><input type="submit" name="register" value="register" class="button"></td>
+            </tr>
+            </tr>
+        </table>
+        </form>
+    </div>
+
+
+    <div class="name">
+        <h2>Log In</h2>
+        <table>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <input type="submit" name="login" value="login" class="button">
+                </tr>
+            </form>
+
+        </table>
+    </div>
+</body>
+
+</html>

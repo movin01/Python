@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>authors</title>
+
+    {% load static %}
+    
+</head>
+<body>
+
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+
+            <tr>
+                <td>task:</td>
+            </tr>
+            <tr>   
+                
+                <form action="/createappointment" method="POST">
+                <td><input type="text" name="tasks"></td>
+                <label for="start">Start date:</label>
+                    <label>
+                      Date:
+                      <input type="date" name="date">
+                    </label>
+
+                {% csrf_token %}
+                <select name="status">
+                  <option value="Missed">Missed</option>
+                  <option value="Done">Done</option>
+                  <option value="Pending">Pending</option>
+
+                </select>
+                <br><br>
+                <input type="submit" name="createappointment" value="createappointment" class="button">
+        </form>
+        <a href="/appointments">Back</a>
+
+
+    </body>
+    </html>
+
+<a href="/logout">Log out</a> 

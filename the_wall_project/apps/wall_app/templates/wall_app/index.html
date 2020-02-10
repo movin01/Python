@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_app/css/style.css'%}" />
+    <title>Wall</title>
+  </head>
+  <body class="green lighten-5">
+    <div class="container">
+      <h1 class="center-align">The Wall</h1>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+          {{message}}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <div class="row">
+        <div class="col s12 m6">
+          <form
+            action="/create_user"
+            class="z-depth-3 grey lighten-5"
+            method="POST"
+          >
+            <h3 class="center-align">Register</h3>
+            <div class="input-field">
+              <label for="f_name" class="grey-text text-darken-3"
+                >First Name:</label
+              >
+              <input type="text" name="f_name" id="f_name" />
+            </div>
+            <div class="input-field">
+              <label for="l_name" class="grey-text text-darken-3"
+                >Last Name:</label
+              >
+              <input type="text" name="l_name" id="l_name" />
+            </div>
+            <div class="input-field">
+              <label for="email_reg" class="grey-text text-darken-3"
+                >Email:</label
+              >
+              <input type="text" name="email_reg" id="email_reg" />
+            </div>
+            <div class="input-field">
+              <label for="password_reg" class="grey-text text-darken-3"
+                >Password:</label
+              >
+              <input type="password" name="password_reg" id="password_reg" />
+            </div>
+            <div class="input-field">
+              <label for="password_confirm" class="grey-text text-darken-3"
+                >Confirm Password:</label
+              >
+              <input
+                type="password"
+                name="password_confirm"
+                id="password_confirm"
+              />
+            </div>
+            {% csrf_token%}
+            <input
+              type="submit"
+              value="Register"
+              class="btn-large green darken-1"
+            />
+          </form>
+        </div>
+
+        <div class="col s12 m6">
+          <form action="/login" class="z-depth-3 grey lighten-5" method="POST">
+            <h3 class="center-align">Login</h3>
+            <div class="input-field">
+              <label for="email_login" class="grey-text text-darken-3"
+                >Email:</label
+              >
+              <input type="text" name="email_login" id="email_login" />
+            </div>
+            <div class="input-field">
+              <label for="password_login" class="grey-text text-darken-3"
+                >Password:</label
+              >
+              <input
+                type="password"
+                name="password_login"
+                id="password_login"
+              />
+            </div>
+            {% csrf_token %}
+            <input
+              type="submit"
+              value="Login"
+              class="btn-large green darken-1"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

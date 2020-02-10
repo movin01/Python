@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>authors</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+
+    {% load static %}
+    
+</head>
+<body>
+
+<div id="name">
+        <h2>Welcome {{ person.first_name }}! This person has {{ quotecount }} posts</h2>
+
+    </div>
+
+
+
+
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <!-- {% if request.session.id == person.id %}
+    <div class="name">
+            <form action="/update/{{quotes.id}}" method="POST">
+                adding author and quote
+                                <!-- {% csrf_token %}
+                                <p class="name" >Quoted by: <input type="text" name="quotedby" value="{{ person.author }}"></p>
+                                <p class="name" >quote: <input type="text" name="message" value="{{ quotes.quote }}"></p>
+                                <input type="submit" name="update" value="Update" class="button">
+                            </form>
+                        </div>
+    {% endif %} --> 
+
+<h1></h1>
+
+
+
+
+
+    <table border="2" width="800">
+        <tr>
+            <td>All quotes by user</td>
+            <td>Message</td>
+            <td>Author Names</td>
+            
+        </tr>
+        {% for quote in quotes %}
+        <tr>
+            <th>{{ quote.poster.first_name }}</th>
+            <td>{{ quote.quote }} </td>
+            <td>{{ quote.author }}
+            </td>
+            {% if request.session.id == quote.poster.id %}
+            <td><a href="/delete/{{quote.id}}">Delete</a>&nbsp;&nbsp;|&nbsp;&nbsp; 
+            <a href="/editquote/{{quote.id}}">Edit</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    </table>
+
+
+    <p><a href="/success">Back</a></p>
+</body>
+</html>

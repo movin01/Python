@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>authors</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+
+    {% load static %}
+    
+</head>
+<body>
+
+<div id="name">
+        <h2>Welcome {{ person.first_name }}!</h2>
+    </div>
+
+    <a href="/editmyaccount.html/">Edit my account</a>
+
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+        <h1></h1>
+        <div class="name">
+            <form action="/addauthorquote" method="POST">
+<!-- adding author and quote -->
+                {% csrf_token %}
+                <p class="name" >author: <input type="text" name="name"></p>
+                <p class="name" >quote: <input type="text" name="quotes"></p>
+                <input type="submit" name="addauthorquote" value="addauthorquote" class="button">
+            </form>
+        </div>
+
+        <!-- create list for authors and quotes -->
+
+        <table boarder="2" width="150">
+            <tr>
+                <td>Quotes</td>
+            </tr>
+            {% for quote in quotes %}
+            <tr>
+                <th>{{ quote.author }}</th>
+                <td>{{ quote.quote }} </td>
+                <p><a href="/delete/">Delete</a></p>
+                <td><p>Posted by <a href="/index/{{quote.poster.first_name}}">{{ quote.poster.first_name }}</a></p></td>
+            </tr>
+            {% endfor %}
+            <p><a href="/delete/">Delete</a></p>
+        </table>
+
+
+
+
+
+    </body>
+    </html>
+
+<a href="/logout">Log out</a> 

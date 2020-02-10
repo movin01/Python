@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_app/css/style.css'%}" />
+    <title>Wall</title>
+  </head>
+  <body class="green lighten-5">
+    <div class="header z-depth-5 grey lighten-4">
+      <div class="valign-wrapper inline-top">
+        <h5 class="left-align">CodingDojo Wall</h5></div>
+        <div class="valign-wrapper inline-top">
+        <h5 class="right-align ">Welcome {{request.session.name}}</h5>
+        
+        </div>
+        <div class="valign-wrapper inline-top">
+            <a href="/destroy_session" class="right-align block">log off</a>
+        
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <form action="/post_message" class="z-depth-3 grey lighten-5" method="POST">
+        <h5>Post a message</h5>
+        <textarea name="message" id="message"class="materialize-textarea"></textarea>
+        <input
+              type="submit"
+              value="POST"
+              class="btn-large green darken-1"
+            />
+            {% csrf_token %}
+          </form>
+      </div>
+      {% for message in all_messages %}
+      <div class="row">
+        
+        <div class="card z-depth-3 grey lighten-5 message">
+          <h6>{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at}}</h6>
+          <div class="card-content">
+            <p>{{message.message}}</p>
+        </div>
+        {% if message.user.id == request.session.user_id %}
+        <form action="/destroy_message" class="hidden" method="POST">
+        <input type="hidden" name="message_id" value={{message.id}}>
+        <input type="submit" value="Delete">
+        {% csrf_token %}
+        </form>
+        
+        {% endif %}
+      
+
+        </div>
+      </div>
+      {% for comment in message.comments.all %}
+      <div class="row">
+        <div class="card z-depth-3 grey lighten-5 comment">
+            <h6>{{comment.user.first_name}} {{comment.user.last_name}} - {{comment.created_at}}</h6>
+            <div class="card-content">
+                <p>{{comment.comment}}</p>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+      <form action="/post_comment" class="z-depth-3 grey lighten-5 comment" id="comment" method="POST">
+        <label for="comment">Post a comment</label>
+        <input type="hidden" name="message_id" value={{message.id}}>
+        <textarea name="comment" id="comment_text"class="materialize-textarea"></textarea>
+        <input
+              type="submit"
+              value="Post a comment"
+              class="btn-small green darken-1"
+            />
+            {% csrf_token %}
+      </form>
+      {% endfor %}
+    </div>
+  </body>
+</html>

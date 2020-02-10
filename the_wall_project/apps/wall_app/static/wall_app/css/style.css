@@ -1,0 +1,69 @@
+form {
+    border: 1px solid lightgray;
+    padding: 15px 20px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+
+
+
+.header {
+
+    height: 75px;
+    border-bottom: 1px solid black;
+}
+
+.header>h5 {
+    margin: 0px;
+
+}
+
+.valign-wrapper {
+    padding-left: 10px;
+    width: 30%;
+
+}
+
+.inline-top {
+    display: inline-block;
+    vertical-align: center;
+    ;
+}
+
+.block {
+    display: block;
+}
+
+.error {
+    color: red;
+    font-size: 24px;
+}
+
+.card-content {
+    margin-left: 10px;
+}
+
+.card {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.comment {
+    margin-left: 50px;
+    margin-top: 15px;
+}
+
+.message {
+    margin-top: 30px;
+}
+
+.delete {
+    margin-right: 25px;
+}
+
+.hidden {
+    display: inline-block;
+    border: none;
+    margin-top: -25px;
+}

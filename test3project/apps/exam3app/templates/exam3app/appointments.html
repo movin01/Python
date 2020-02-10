@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>authors</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+
+    {% load static %}
+    
+</head>
+<body>
+
+<div id="name">
+        <h2>Welcome {{ person.email }}! 
+
+    </div>
+
+
+
+
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="/addappointmentpage">Add an addappointment</a>
+<h1></h1>
+
+    <table border="2" width="800">
+        <tr>
+            <td>Tasks</td>
+            <td>Date</td>
+            <td>Status</td>
+            <td>Action</td>
+        </tr>
+        {% for apointment in apointments %}
+        <tr>
+            <td>{{ apointment.tasks }} </td>
+            <td>{{ apointment.date }}</td>
+            <th>{{ apointment.status }}</th>
+
+            {% if request.session.id == apointment.poster.id %}
+            <td><a href="/delete/{{apointment.id}}">Delete</a>&nbsp;&nbsp;|&nbsp;&nbsp; 
+            <a href="/editappointmentpage/{{apointment.id}}">Edit</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    </table>
+    <a href="/logout">Log out</a> 
+
+    <!-- <p><a href="/success">Back</a></p> -->
+</body>
+</html>

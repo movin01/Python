@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+</head>
+<body>
+    <h1>the wall</h1>
+    <form action="/new_message" method="post">
+        {% csrf_token %}
+        Message:
+        <input type="text" name="message">
+        <input type="submit" name="new_message" value="new_message" class="button">
+
+
+        </form>
+        <ul>
+                {% for pepsi in all_messages%}
+                <li>{{pepsi.message}} posted this message:</li>
+                <li>{{message.message}}</li>
+                <br>
+                <p>This is the comments for this message:</p>
+                    {% for comment in message.comment.all%}
+                    <p>{{comment.comment}</p>
+                    {% endfor %}
+                    {{message.comments.all}}
+                <form action="/new_comment" method="post">
+                    {% csrf_token %}
+                Comment:
+                <input type="text" name="comment" id="comment">
+                <input type="hidden" name="message_id" value="{{message.id}}">
+                <button>Post Comment</button>
+                </form>
+                {% endfor %}
+        </ul>
+</body>
+</html>

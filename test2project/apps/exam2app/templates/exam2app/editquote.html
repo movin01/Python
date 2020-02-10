@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>authors</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+
+    {% load static %}
+    
+</head>
+<body>
+
+<div id="name">
+        <h2>Welcome {{ person.first_name }}!</h2>
+    </div>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+        <h1></h1>
+        <div class="name">
+            <form action="/update/{{q.id}}" method="POST">
+<!-- adding author and quote -->
+                {% csrf_token %}
+                <p class="name" >Quoted by: <input type="text" name="quotedby" value="{{ q.author }}"></p>
+                <p class="name" >quote: <input type="text" name="message" value="{{ q.quote }}"></p>
+                <input type="submit" name="update" value="Update" class="button">
+            </form>
+        </div>
+
+        <!-- create list for authors and quotes -->
+
+            <h3>Quotes</h3>
+            <p>{{ q.author }}</p>
+            <p>{{ q.quote }}</p>
+            <p>Posted by {{ q.poster.first_name }}</p>
+            <p><a href="/delete/{{q.id}}">Delete</a></p>
+            <p><a href="/success">Back</a></p>
+
+        <!-- <table boarder="2" width="150">
+            <tr>
+                <td>Quotes</td>
+            </tr>
+            <tr>
+                <th>{{ q.author }}</th>
+                <td>{{ q.quote }} </td>
+                <p><a href="/delete/">Delete</a></p>
+                <td><p>Posted by <a href="/index/{{quote.poster.first_name}}">{{ quote.poster.first_name }}</a></p></td>
+            </tr>
+            <p><a href="/delete/{{q.id}}">Delete</a></p>
+            <p><a href="/success">Back</a></p>
+
+        </table> -->
+
+
+
+
+
+    </body>
+    </html>
+
+<a href="/logout">Log out</a> 
